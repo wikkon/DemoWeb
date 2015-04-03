@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset= "utf-8" />
+  <title>Flota</title>
+  <link href="Site.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav id="nav01"></nav>
+
+<div id="main">
+  <h1>Flota</h1>
+  <div id="id01"></div>
+  <footer id="foot01"></footer>
+</div>
+
+<script src="Script.js"></script>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "http://localhost/flota/pobierz_dane.php";
+
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        myFunction(xmlhttp.responseText);
+    }
+}
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(response) {
+    var arr = JSON.parse(response);
+    var i;
+    var out = "<table><tr><th>Data dokumentu</th><th>Nr dokumentu</th></tr>";
+    for(i = 0; i < arr.length; i++) {
+        out += "<tr><td>" + 
+        arr[i].DATADOK +
+        "</td><td>" +
+        arr[i].NRDOKWEW +
+        "</td><td>";
+    }
+    out += "</table>"
+    document.getElementById("id01").innerHTML = out;
+}
+</script>
+
+</body>
+</html>
